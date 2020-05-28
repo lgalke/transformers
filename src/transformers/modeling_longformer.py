@@ -30,11 +30,12 @@ from .modeling_roberta import RobertaLMHead, RobertaModel
 
 logger = logging.getLogger(__name__)
 
-LONGFORMER_PRETRAINED_MODEL_ARCHIVE_MAP = {
-    "longformer-base-4096": "https://s3.amazonaws.com/models.huggingface.co/bert/allenai/longformer-base-4096/pytorch_model.bin",
-    "longformer-large-4096": "https://s3.amazonaws.com/models.huggingface.co/bert/allenai/longformer-large-4096/pytorch_model.bin",
-    "longformer-large-4096-finetuned-triviaqa": "https://s3.amazonaws.com/models.huggingface.co/bert/allenai/longformer-large-4096-finetuned-triviaqa/pytorch_model.bin",
-}
+LONGFORMER_PRETRAINED_MODEL_ARCHIVE_LIST = [
+    "allenai/longformer-base-4096",
+    "allenai/longformer-large-4096",
+    "allenai/longformer-large-4096-finetuned-triviaqa",
+    # See all Longformer models at https://huggingface.co/models?filter=longformer
+]
 
 
 class LongformerSelfAttention(nn.Module):
@@ -470,7 +471,6 @@ class LongformerModel(RobertaModel):
     """
 
     config_class = LongformerConfig
-    pretrained_model_archive_map = LONGFORMER_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "longformer"
 
     def __init__(self, config):
@@ -628,7 +628,6 @@ class LongformerModel(RobertaModel):
 @add_start_docstrings("""Longformer Model with a `language modeling` head on top. """, LONGFORMER_START_DOCSTRING)
 class LongformerForMaskedLM(BertPreTrainedModel):
     config_class = LongformerConfig
-    pretrained_model_archive_map = LONGFORMER_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "longformer"
 
     def __init__(self, config):
@@ -717,7 +716,6 @@ class LongformerForMaskedLM(BertPreTrainedModel):
 )
 class LongformerForSequenceClassification(BertPreTrainedModel):
     config_class = LongformerConfig
-    pretrained_model_archive_map = LONGFORMER_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "longformer"
 
     def __init__(self, config):
@@ -832,7 +830,6 @@ class LongformerClassificationHead(nn.Module):
 )
 class LongformerForQuestionAnswering(BertPreTrainedModel):
     config_class = LongformerConfig
-    pretrained_model_archive_map = LONGFORMER_PRETRAINED_MODEL_ARCHIVE_MAP
     base_model_prefix = "longformer"
 
     def __init__(self, config):
